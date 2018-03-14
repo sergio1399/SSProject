@@ -1,12 +1,10 @@
-package employeeModel;
+package practice.employeeModel;
 
-import countriesModel.Country;
-import docsModel.Document;
-import officeModel.Office;
+import practice.countriesModel.Country;
+import practice.docsModel.Document;
+import practice.officeModel.Office;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by sergi on 03.03.2018.

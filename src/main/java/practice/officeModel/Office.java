@@ -1,7 +1,7 @@
-package officeModel;
+package practice.officeModel;
 
-import employeeModel.Employee;
-import orgModel.Organization;
+import practice.employeeModel.Employee;
+import practice.orgModel.Organization;
 
 import javax.persistence.*;
 import java.util.Set;

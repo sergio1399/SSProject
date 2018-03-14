@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Doc_types (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     version        INTEGER NOT NULL,
     code           VARCHAR(3) NOT NULL,
-    name           VARCHAR(20) NOT NULL
+    name           VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Document (
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Document (
     version       INTEGER NOT NULL,
     doc_types_id  INTEGER,
     doc_number    VARCHAR(16),
-    doc_date      DATETIME,
+    doc_date      DATE,
     is_identified BOOLEAN
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS Countries (
 
 ALTER TABLE Office ADD FOREIGN KEY (organization_id) REFERENCES Organization(id);
 ALTER TABLE Employee ADD FOREIGN KEY (office_id) REFERENCES Office(id);
-ALTER TABLE Employee ADD FOREIGN KEY (countrie_id) REFERENCES Countries(id);
+ALTER TABLE Employee ADD FOREIGN KEY (countries_id) REFERENCES Countries(id);
 ALTER TABLE Employee ADD FOREIGN KEY (document_id) REFERENCES Document(id);
 ALTER TABLE User ADD FOREIGN KEY (employee_id) REFERENCES Employee(id);
 ALTER TABLE Document ADD FOREIGN KEY(doc_types_id) REFERENCES Doc_types(id);

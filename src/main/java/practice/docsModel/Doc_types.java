@@ -1,4 +1,4 @@
-package docsModel;
+package practice.docsModel;
 
 
 import javax.persistence.*;

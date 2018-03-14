@@ -17,7 +17,7 @@ INSERT INTO Doc_types (version, code, name) VALUES (0, '03','Свидетель�
 INSERT INTO Doc_types (version, code, name) VALUES (0, '13','Удостоверение беженца');
 
 INSERT INTO Document (version, doc_types_id, doc_number, doc_date, is_identified)
-   VALUES (0, 1, '2354 327654', '20.03.2007', TRUE);
+   VALUES (0, 1, '2354 327654', '2007-02-02', TRUE);
 
 INSERT INTO Employee (version, first_name, second_name, middle_name, position, phone, address, countries_id, office_id, document_id)
    VALUES (0, 'John', 'Simonic', null, 'manager', '2525251', '2020 Main st. Sommerville NJ', 5, 1, 1);

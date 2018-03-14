@@ -1,6 +1,6 @@
-package countriesModel;
+package practice.countriesModel;
 
-import employeeModel.Employee;
+import practice.employeeModel.Employee;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -1,6 +1,6 @@
-package docsModel;
+package practice.docsModel;
 
-import employeeModel.Employee;
+import practice.employeeModel.Employee;
 
 import javax.persistence.*;
 import java.util.Date;

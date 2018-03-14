@@ -1,4 +1,4 @@
-package employeeModel;
+package practice.employeeModel;
 
 import javax.persistence.*;
 

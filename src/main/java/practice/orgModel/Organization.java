@@ -1,6 +1,6 @@
-package orgModel;
+package practice.orgModel;
 
-import officeModel.Office;
+import practice.officeModel.Office;
 
 import javax.persistence.*;
 import java.util.Set;
