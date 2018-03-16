@@ -3,6 +3,7 @@ package practice.employeeModel;
 import practice.countriesModel.Country;
 import practice.docsModel.Document;
 import practice.officeModel.Office;
+import practice.userModel.User;
 
 import javax.persistence.*;
 
@@ -61,6 +62,18 @@ public class Employee {
 
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @OneToOne( mappedBy = "employee",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
@@ -87,9 +100,6 @@ public class Employee {
 
     @Column(name = "middle_name")
     private String middleName;
-
-    @Column(name = "address")
-    private String address;
 
     @Column(name = "position")
     private String position;
@@ -123,14 +133,6 @@ public class Employee {
 
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPosition() {

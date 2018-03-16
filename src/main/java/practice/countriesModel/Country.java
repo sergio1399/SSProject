@@ -31,9 +31,6 @@ public class Country {
     public void setEmployees(Set<Employee> employees) {
 
         this.employees = employees;
-        for (Employee employee: employees) {
-            employee.setCountry(this);
-        }
     }
 
     public void addEmployee(Employee employee)

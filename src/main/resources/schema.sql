@@ -28,10 +28,16 @@ CREATE TABLE IF NOT EXISTS Employee (
     middle_name   VARCHAR(20),
     position      VARCHAR(20),
     phone         VARCHAR(20),
-    address       VARCHAR(50),
-    countries_id   INTEGER,
+    countries_id  INTEGER,
     office_id     INTEGER,
-    document_id   INTEGER
+    document_id   INTEGER,
+    address_id    INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS Address (
+    id            INTEGER  PRIMARY KEY AUTO_INCREMENT,
+    address       VARCHAR(80) NOT NULL,
+    countries_id  INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS User (
@@ -70,11 +76,13 @@ ALTER TABLE Office ADD FOREIGN KEY (organization_id) REFERENCES Organization(id)
 ALTER TABLE Employee ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 ALTER TABLE Employee ADD FOREIGN KEY (countries_id) REFERENCES Countries(id);
 ALTER TABLE Employee ADD FOREIGN KEY (document_id) REFERENCES Document(id);
+ALTER TABLE Employee ADD FOREIGN KEY (address_id) REFERENCES Address(id);
 ALTER TABLE User ADD FOREIGN KEY (employee_id) REFERENCES Employee(id);
 ALTER TABLE Document ADD FOREIGN KEY(doc_types_id) REFERENCES Doc_types(id);
 CREATE INDEX IX_Office_Org_Id ON Office (organization_id);
 CREATE INDEX IX_Employee_Office_Id ON Employee (office_id);
 CREATE INDEX IX_Employee_Countries_Id ON Employee (countries_id);
 CREATE INDEX IX_Employee_Document_Id ON Employee (document_id);
+CREATE INDEX IX_Employee_Address_Id ON Employee (address_id);
 CREATE INDEX IX_User_Employee_Id ON User (employee_id);
 CREATE INDEX IX_Document_Doc_types_Id ON Document (doc_types_id);

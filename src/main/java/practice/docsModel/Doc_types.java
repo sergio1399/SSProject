@@ -29,9 +29,6 @@ public class Doc_types {
     public void setDocuments(Set<Document> documents) {
 
         this.documents = documents;
-        for (Document document: documents) {
-            document.setDocType(this);
-        }
     }
 
     public void addDocument(Document document)

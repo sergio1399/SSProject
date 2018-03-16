@@ -1,4 +1,4 @@
-package orgController;
+package practice.orgController;
 
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +17,6 @@ public interface OrgController {
      *  @param orgInView
      * @return JSON organizations value
      */
-    /*List<OrgView> getOrganizations( @RequestParam(value="name", required=true, defaultValue="") String name,
-                                    @RequestParam(value="inn", required=false) String inn,
-                                    @RequestParam(value="isActive", required=false) boolean isActive);*/
-
     ResponseView getOrganizations(@RequestBody OrgInView orgInView);
 
     /**
@@ -49,6 +45,6 @@ public interface OrgController {
      * @param id
      * @return JSON success check
      */
-    ResponseView delete(@RequestParam(value="id", required=true) int id);
+    ResponseView delete(@PathVariable("id") int id);
 
 }

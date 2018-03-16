@@ -19,8 +19,11 @@ INSERT INTO Doc_types (version, code, name) VALUES (0, '13','Удостовер�
 INSERT INTO Document (version, doc_types_id, doc_number, doc_date, is_identified)
    VALUES (0, 1, '2354 327654', '2007-02-02', TRUE);
 
-INSERT INTO Employee (version, first_name, second_name, middle_name, position, phone, address, countries_id, office_id, document_id)
-   VALUES (0, 'John', 'Simonic', null, 'manager', '2525251', '2020 Main st. Sommerville NJ', 5, 1, 1);
+INSERT INTO Address (version, address, countries_id)
+   VALUES(0, '3454 Main st. Sommerville NJ', 5);
+
+INSERT INTO Employee (version, first_name, second_name, middle_name, position, phone, countries_id, office_id, document_id, address_id)
+   VALUES (0, 'John', 'Simonic', null, 'manager', '2525251', 5, 1, 1, 1);
 
 INSERT INTO User (employee_id, version, name, login, password, role)
   VALUES (1, 0, 'Johnny', 'silent_assasin', '23rtswe5', 'admin');

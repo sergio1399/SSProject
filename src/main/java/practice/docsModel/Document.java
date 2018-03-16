@@ -27,9 +27,6 @@ public class Document {
     public void setEmployees(Set<Employee> employees) {
 
         this.employees = employees;
-        for (Employee employee: employees) {
-            employee.setDocument(this);
-        }
     }
 
     public void addEmployee(Employee employee)
