@@ -2,6 +2,7 @@ package practice.countriesController.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import practice.commonView.ResponseView;
 import practice.countriesController.CountriesController;
@@ -17,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * Created by sergi on 15.03.2018.
  */
 @RestController
-@RequestMapping(value = "api/countries", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/countries", produces = APPLICATION_JSON_VALUE, method = {RequestMethod.GET})
 public class CountriesControllerImpl implements CountriesController {
     private final CountriesService countriesService;
 

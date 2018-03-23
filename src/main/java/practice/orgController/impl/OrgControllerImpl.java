@@ -42,7 +42,7 @@ public class OrgControllerImpl implements OrgController {
 
     @Override
     @RequestMapping(value = "/{id}", method = {GET})
-    public ResponseView getOrg(@PathVariable("id") int id) {
+    public ResponseView getOrg(@PathVariable("id") long id) {
         OrgView orgView = new OrgView();
         try {
             orgView = orgService.getOrg(id);

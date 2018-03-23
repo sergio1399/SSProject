@@ -28,13 +28,20 @@ public class User {
             nullable = false)
     private String name;
 
-    @Column(name = "login",
+    @Column(name = "login", unique = true,
             nullable = false)
     private String login;
 
     @Column(name = "password",
             nullable = false)
     private String password;
+
+    @Column(name = "is_active",
+            nullable = false)
+    private Boolean isActive;
+
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "role")
     private String role;
@@ -71,6 +78,14 @@ public class User {
         this.password = password;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getRole() {
         return role;
     }
@@ -81,6 +96,18 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public User() {

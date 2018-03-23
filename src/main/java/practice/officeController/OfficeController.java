@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import practice.commonView.ResponseView;
+import practice.officeView.OfficeInView;
 import practice.officeView.OfficeView;
 import practice.orgView.OrgInView;
 import practice.orgView.OrgView;
@@ -12,17 +13,17 @@ import practice.orgView.OrgView;
 public interface OfficeController {
     /**
      * Get offices by params
-     *  @param officeView
+     *  @param officeInView
      * @return JSON offices value
      */
-    ResponseView getOffices(@RequestBody OfficeView officeView);
+    ResponseView getOffices(@RequestBody OfficeInView officeInView);
 
     /**
      * Get office by ID
      * @param orgId
      * @return JSON offices value
      */
-    ResponseView getOffice(@PathVariable("orgId") int orgId);
+    ResponseView getOffice(@PathVariable("orgId") long orgId);
 
     /**
      * Update office
@@ -43,5 +44,5 @@ public interface OfficeController {
      * @param id
      * @return JSON success check
      */
-    ResponseView delete(@PathVariable("id") int id);
+    ResponseView delete(@PathVariable("id") long id);
 }

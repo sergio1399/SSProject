@@ -14,11 +14,11 @@ import java.util.List;
 public interface EmployeeService {
     List<EmployeeView> getEmployees(EmployeeInView employeeInView);
 
-    EmployeeView getEmp(int id);
+    EmployeeView getEmp(long id);
 
     boolean update(EmployeeView employeeView);
 
     boolean save(EmployeeView employeeView);
 
-    boolean delete(int id);
+    boolean delete(long id);
 }

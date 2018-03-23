@@ -58,9 +58,11 @@ public class Office {
         this.employees = employees;
     }
 
+    @Basic(optional = false)
     @Column(name = "name")
     private String name;
 
+    @Basic(optional = false)
     @Column(name = "address")
     private String address;
 
@@ -68,7 +70,7 @@ public class Office {
     private String phone;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     public Long getId() {
         return id;
@@ -98,7 +100,7 @@ public class Office {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
@@ -109,5 +111,30 @@ public class Office {
     public Office()
     {
 
+    }
+
+    public Office(String name, String phone, boolean isActive) {
+        this.name = name;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public Office(String name, String address, String phone, boolean isActive) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public Office(Long id, String name, String address, String phone, boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public Office(Long id) {
+        this.id = id;
     }
 }

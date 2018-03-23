@@ -7,8 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
  * Organization data view
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrgView {
-    public int id;
+    public Long id;
 
     public String name;
 
@@ -22,7 +23,7 @@ public class OrgView {
 
     public String phone;
 
-    public boolean isActive;
+    public Boolean isActive;
 
 
     //для jackson

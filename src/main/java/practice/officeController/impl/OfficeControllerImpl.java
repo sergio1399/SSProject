@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import practice.commonView.ResponseView;
 import practice.officeController.OfficeController;
 import practice.officeService.OfficeService;
+import practice.officeView.OfficeInView;
 import practice.officeView.OfficeView;
 
 import java.util.ArrayList;
@@ -27,10 +28,10 @@ public class OfficeControllerImpl implements OfficeController {
 
     @Override
     @RequestMapping(value = "/list", method = {POST})
-    public ResponseView getOffices(@RequestBody OfficeView officeView) {
+    public ResponseView getOffices(@RequestBody OfficeInView officeInView) {
         List<OfficeView> list = new ArrayList<>();
         try {
-            list = officeService.getOffices(officeView);
+            list = officeService.getOffices(officeInView);
         }
         catch (Exception e) {
             String message = "";
@@ -41,7 +42,7 @@ public class OfficeControllerImpl implements OfficeController {
 
     @Override
     @RequestMapping(value = "/{id}", method = {GET})
-    public ResponseView getOffice(@PathVariable("id") int id) {
+    public ResponseView getOffice(@PathVariable("id") long id) {
         OfficeView officeView = new OfficeView();
         try {
             officeView = officeService.getOffice(id);
@@ -83,7 +84,7 @@ public class OfficeControllerImpl implements OfficeController {
 
     @Override
     @RequestMapping(value = "/delete/{id}", method = {POST})
-    public ResponseView delete(@PathVariable("id") int id) {
+    public ResponseView delete(@PathVariable("id") long id) {
         Boolean success = false;
         try {
             success = officeService.delete(id);

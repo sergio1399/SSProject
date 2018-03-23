@@ -1,5 +1,7 @@
 package practice.orgView;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Created by sergi on 13.03.2018.
  */

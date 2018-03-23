@@ -90,13 +90,15 @@ public class Employee {
         user.setEmployee(this);
     }
 
+    @Basic(optional = false)
     @Column(name = "first_name",
             nullable = false)
     private String firstName;
 
-    @Column(name = "second_name",
+    @Basic(optional = false)
+    @Column(name = "last_name",
             nullable = false)
-    private String secondName;
+    private String lastName;
 
     @Column(name = "middle_name")
     private String middleName;
@@ -119,12 +121,12 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String secondName) {
+        this.lastName = secondName;
     }
 
     public String getMiddleName() {
@@ -154,5 +156,22 @@ public class Employee {
     public Employee()
     {
 
+    }
+
+    public Employee(Long id, String firstName, String lastName, String middleName, String position, String phone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
+    }
+
+    public Employee(String firstName, String lastName, String middleName, String position, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
     }
 }

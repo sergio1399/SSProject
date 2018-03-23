@@ -45,7 +45,7 @@ public class Organization {
     private String phone;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Office> offices;
@@ -64,6 +64,10 @@ public class Organization {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -106,11 +110,11 @@ public class Organization {
         this.phone = phone;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 
@@ -126,11 +130,42 @@ public class Organization {
         return offices;
     }
 
+    public void setOffices(Set<Office> offices) {
+        this.offices = offices;
+    }
+
     public void setPersons(Set<Office> offices) {
         this.offices = offices;
     }
 
+    public Organization(String name, String inn, boolean isActive) {
+        this.name = name;
+        this.inn = inn;
+        this.isActive = isActive;
+    }
 
+    public Organization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
 
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
 
+    public Organization(Long id) {
+        this.id = id;
+    }
 }

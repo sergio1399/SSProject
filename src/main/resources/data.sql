@@ -25,8 +25,8 @@ INSERT INTO Address (version, address, countries_id)
 INSERT INTO Employee (version, first_name, second_name, middle_name, position, phone, countries_id, office_id, document_id, address_id)
    VALUES (0, 'John', 'Simonic', null, 'manager', '2525251', 5, 1, 1, 1);
 
-INSERT INTO User (employee_id, version, name, login, password, role)
-  VALUES (1, 0, 'Johnny', 'silent_assasin', '23rtswe5', 'admin');
+INSERT INTO User (employee_id, version, name, login, password, is_active, code, role)
+  VALUES (1, 0, 'Johnny', 'silent_assasin', '23rtswe5', false, 'bas43k7nty51', 'admin');
 
 
 

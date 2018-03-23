@@ -1,5 +1,6 @@
 package practice.employeeModel;
 
+import practice.countriesModel.Country;
 import practice.officeModel.Office;
 
 import javax.persistence.*;
@@ -34,6 +35,18 @@ public class Address {
     {
         getEmployees().remove(employee);
         employee.setAddress(null);
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "countries_id")
+    private Country country;
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public Set<Employee> getEmployees() {

@@ -2,6 +2,7 @@ package practice.docsController.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import practice.commonView.ResponseView;
 import practice.docsController.DocsController;
@@ -17,7 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * Created by sergi on 15.03.2018.
  */
 @RestController
-@RequestMapping(value = "api/docs", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/docs", produces = APPLICATION_JSON_VALUE, method = {RequestMethod.GET})
 public class DocsControllerImpl implements DocsController {
     private final DocsService docsService;
 

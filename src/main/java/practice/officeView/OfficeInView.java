@@ -3,25 +3,19 @@ package practice.officeView;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * Office data view
- *
+ * Created by sergi on 17.03.2018.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class OfficeView {
-    public Long id;
-
+public class OfficeInView {
     public Long orgId;
 
     public String name;
 
-    public String address;
-
     public String phone;
 
-    public Boolean isActive;
+    public boolean isActive;
 
     //для jackson
-    public OfficeView() {
+    public OfficeInView() {
 
     }
 }

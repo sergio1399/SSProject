@@ -1,11 +1,13 @@
 package practice.countriesView;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Countries data view
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountriesView {
-    public int id;
 
     public String code;
 

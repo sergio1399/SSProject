@@ -1,12 +1,13 @@
 package practice.docsView;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Document types data view
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DocsView {
-    public int id;
-
     public String code;
 
     public String name;

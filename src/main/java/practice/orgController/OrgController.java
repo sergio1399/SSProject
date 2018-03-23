@@ -24,7 +24,7 @@ public interface OrgController {
      * @param id
      * @return JSON organization value
      */
-    ResponseView getOrg(@PathVariable("id") int id);
+    ResponseView getOrg(@PathVariable("id") long id);
 
     /**
      * Update organization

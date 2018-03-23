@@ -1,12 +1,14 @@
 package practice.employeeView;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 /**
  * Created by sergi on 15.03.2018.
  */
 public class EmployeeInView {
-    public int officeId;
+    public Long officeId;
 
     public String firstName;
 

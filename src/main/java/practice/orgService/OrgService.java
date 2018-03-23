@@ -12,12 +12,12 @@ public interface OrgService {
 
     List<OrgView> getOrganizations(OrgInView orgInView);
 
-    OrgView getOrg(int id);
+    OrgView getOrg(long id);
 
     boolean update(OrgView orgView);
 
     boolean save(OrgView orgView);
 
-    boolean delete(int id);
+    boolean delete(long id);
 
 }
