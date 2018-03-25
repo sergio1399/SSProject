@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import practice.dao.officeDAO.OfficeDAO;
 import practice.model.officeModel.Office;
 import practice.service.officeService.OfficeService;
+import practice.utils.ErrorCode;
+import practice.utils.MyAppException;
 import practice.utils.OfficeConverter;
 import practice.view.officeView.OfficeInView;
 import practice.view.officeView.OfficeView;
@@ -38,16 +40,17 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public OfficeView getOffice(long id) {
+    public OfficeView getOffice(long id) throws MyAppException {
+
         return OfficeConverter.toView(officeDAO.getOffice(id));
     }
 
     @Override
     @Transactional
-    public boolean update(OfficeView officeView) {
+    public boolean update(OfficeView officeView) throws MyAppException {
         //проверяем на null id
-        //if( officeView.id == null)
-            //throw new NullInValue();
+        if( officeView.id == null)
+            throw new MyAppException("Не установлен обязательный параметр id", ErrorCode.NULL_REQUIRED_PARAM);
         Office officeToUpdate = new Office(officeView.id, officeView.name, officeView.address, officeView.phone,
                                             officeView.isActive);
         return officeDAO.update(officeToUpdate);
@@ -55,9 +58,9 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional
-    public boolean save(OfficeView officeView) {
-        //if( officeView.orgId == null)
-        //throw new NullInValue();
+    public boolean save(OfficeView officeView) throws MyAppException {
+        if( officeView.orgId == null)
+            throw new MyAppException("Не установлен обязательный параметр id организации", ErrorCode.NULL_REQUIRED_PARAM);
         Office officeToSave = new Office(officeView.name, officeView.address, officeView.phone,
                 officeView.isActive);
         Organization org = new Organization(officeView.orgId);

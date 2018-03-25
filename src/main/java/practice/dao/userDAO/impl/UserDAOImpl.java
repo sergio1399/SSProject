@@ -1,6 +1,7 @@
 package practice.dao.userDAO.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import practice.dao.userDAO.UserDAO;
 import practice.model.userModel.User;
 
@@ -13,6 +14,7 @@ import javax.persistence.criteria.Root;
 /**
  * Created by sergi on 15.03.2018.
  */
+@Repository
 public class UserDAOImpl implements UserDAO {
     private final EntityManager em;
 
@@ -23,37 +25,25 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean save(User user) {
-        try {
-            em.persist(user);
-        }
-        catch (Exception e)
-        {
-            //throw new Exception();
-        }
+        em.persist(user);
         return true;
     }
 
     @Override
     public boolean activation(String code) {
+        User user = new User();
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
 
-        try {
-            CriteriaBuilder builder = em.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
-
-            Root<User> userRoot = criteria.from(User.class);
-            criteria.select(userRoot).where(builder.equal(userRoot.get("code"), code));
-            TypedQuery<User> query = em.createQuery(criteria);
-            User user = query.getSingleResult();
-            if(user != null && !user.getActive())
-            {
-                user.setActive(true);
-                em.merge(user);
-                return true;
-            }
-        }
-        catch (Exception e)
+        Root<User> userRoot = criteria.from(User.class);
+        criteria.select(userRoot).where(builder.equal(userRoot.get("code"), code));
+        TypedQuery<User> query = em.createQuery(criteria);
+        user = query.getSingleResult();
+        if(user != null && !user.getActive())
         {
-
+            user.setActive(true);
+            em.merge(user);
+            return true;
         }
 
         return false;
@@ -61,22 +51,17 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean login(String login, String password) {
-        try {
-            CriteriaBuilder builder = em.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
 
-            Root<User> userRoot = criteria.from(User.class);
-            criteria.select(userRoot).where(builder.and(builder.equal(userRoot.get("login"), login),
-                           builder.equal(userRoot.get("password"), password)));
-            TypedQuery<User> query = em.createQuery(criteria);
-            User user = query.getSingleResult();
-            if (user != null)
-                return true;
-        }
-        catch (Exception e)
-        {
+        Root<User> userRoot = criteria.from(User.class);
+        criteria.select(userRoot).where(builder.and(builder.equal(userRoot.get("login"), login),
+                       builder.equal(userRoot.get("password"), password)));
+        TypedQuery<User> query = em.createQuery(criteria);
+        User user = query.getSingleResult();
+        if (user != null)
+            return true;
 
-        }
         return false;
     }
 }

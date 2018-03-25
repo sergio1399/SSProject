@@ -13,6 +13,7 @@ import practice.model.employeeModel.Address;
 import practice.model.employeeModel.Employee;
 import practice.service.employeeService.EmployeeService;
 import practice.utils.EmployeeConverter;
+import practice.utils.MyAppException;
 import practice.view.employeeView.EmployeeInView;
 import practice.view.employeeView.EmployeeView;
 
@@ -40,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeView getEmp(long id) {
+    public EmployeeView getEmp(long id) throws MyAppException {
         Employee employee = employeeDAO.getEmp(id);
         Document document = employee.getDocument();
         Doc_types dt = document.getDocType();
@@ -52,14 +53,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public boolean update(EmployeeView employeeView) {
+    public boolean update(EmployeeView employeeView) throws MyAppException {
 
         return employeeDAO.update(employeeView);
     }
 
     @Override
     @Transactional
-    public boolean save(EmployeeView employeeView) {
+    public boolean save(EmployeeView employeeView) throws MyAppException {
 
         return employeeDAO.save(employeeView);
     }

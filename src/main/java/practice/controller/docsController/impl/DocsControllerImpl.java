@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Created by sergi on 15.03.2018.
  */
 @RestController
-@RequestMapping(value = "api/docs", produces = APPLICATION_JSON_VALUE, method = {RequestMethod.GET})
+@RequestMapping(value = "api/docs", produces = APPLICATION_JSON_VALUE)
 public class DocsControllerImpl implements DocsController {
     private final DocsService docsService;
 
@@ -27,13 +28,14 @@ public class DocsControllerImpl implements DocsController {
         this.docsService = docsService;
     }
     @Override
+    @RequestMapping(value = "", method = {GET})
     public ResponseView getDocs() {
         List<DocsView> list = new ArrayList<>();
         try {
             list = docsService.getDocs();
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(list);

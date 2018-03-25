@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import practice.dao.orgDAO.OrgDAO;
 import practice.model.orgModel.Organization;
 import practice.service.orgService.OrgService;
+import practice.utils.ErrorCode;
+import practice.utils.MyAppException;
 import practice.utils.OrgConverter;
 import practice.view.orgView.OrgInView;
 import practice.view.orgView.OrgView;
@@ -31,13 +33,16 @@ public class OrgServiceImpl implements OrgService {
     }
 
     @Override
-    public List<OrgView> getOrganizations(OrgInView orgInView) {
+    public List<OrgView> getOrganizations(OrgInView orgInView) throws MyAppException {
+        //проверяем на null обязательное поле
+        if( orgInView.name == null)
+            throw new MyAppException("Не установлен обязательный параметр название организации", ErrorCode.NULL_REQUIRED_PARAM);
         Organization fltOrg = new Organization(orgInView.name, orgInView.inn, orgInView.isActive);
         return OrgConverter.toViewList(orgDAO.getOrganizations(fltOrg));
     }
 
     @Override
-    public OrgView getOrg(long id) {
+    public OrgView getOrg(long id) throws MyAppException {
 
         Organization org = orgDAO.getOrg(id);
         OrgView view = new OrgView();
@@ -54,10 +59,10 @@ public class OrgServiceImpl implements OrgService {
 
     @Override
     @Transactional
-    public boolean update(OrgView orgView) {
-        //проверяем на null id
-        //if( orgView.name == null)
-        //throw new NullRequiredValue();
+    public boolean update(OrgView orgView) throws MyAppException {
+        //проверяем на null обязательное поле
+        if( orgView.name == null)
+            throw new MyAppException("Не установлен обязательный параметр название организации", ErrorCode.NULL_REQUIRED_PARAM);
         Organization org = new Organization(orgView.id, orgView.name, orgView.fullName, orgView.inn, orgView.kpp,
                                             orgView.address, orgView.phone, orgView.isActive);
 

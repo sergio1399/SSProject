@@ -74,7 +74,7 @@ public class Employee {
         this.address = address;
     }
 
-    @OneToOne( mappedBy = "employee",
+  /*  @OneToOne( mappedBy = "employee",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             optional = false)
@@ -89,7 +89,7 @@ public class Employee {
         this.user = user;
         user.setEmployee(this);
     }
-
+*/
     @Basic(optional = false)
     @Column(name = "first_name",
             nullable = false)

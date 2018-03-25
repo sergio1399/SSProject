@@ -35,7 +35,7 @@ public class UserControllerImpl implements UserController {
             success = userService.register(userView);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -49,7 +49,7 @@ public class UserControllerImpl implements UserController {
             success = userService.activation(code);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -63,7 +63,7 @@ public class UserControllerImpl implements UserController {
             success = userService.login(userView);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);

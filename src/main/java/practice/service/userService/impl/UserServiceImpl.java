@@ -30,20 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public boolean register(UserView userView) {
+    public boolean register(UserView userView) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = new User();
         user.setLogin(userView.login);
-        try {
-            user.setPassword(Crypto.generateHash(userView.password));
-            user.setCode(Crypto.generateHash(Crypto.genRandonStr()));
-        }
-        catch (NoSuchAlgorithmException e) {
-
-        }
-        catch (UnsupportedEncodingException e) {
-
-        }
-
+        user.setPassword(Crypto.generateHash(userView.password));
+        user.setCode(Crypto.generateHash(Crypto.genRandonStr()));
+        user.setActive(false);
         return  userDAO.save(user);
     }
 
@@ -55,9 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(UserView userView) {
+    public boolean login(UserView userView) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String login = userView.login;
-        String password = userView.password;
+        String password = Crypto.generateHash(userView.password);
         return userDAO.login(login, password);
     }
 }

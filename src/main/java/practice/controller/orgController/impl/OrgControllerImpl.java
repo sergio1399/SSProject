@@ -3,6 +3,7 @@ package practice.controller.orgController.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import practice.controller.orgController.OrgController;
+import practice.utils.MyAppException;
 import practice.view.commonView.ResponseView;
 import practice.service.orgService.OrgService;
 import practice.view.orgView.OrgInView;
@@ -33,8 +34,12 @@ public class OrgControllerImpl implements OrgController {
         try {
             list = orgService.getOrganizations(orgInView);
         }
+        catch (MyAppException mae){
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(list);
@@ -47,8 +52,12 @@ public class OrgControllerImpl implements OrgController {
         try {
             orgView = orgService.getOrg(id);
         }
+        catch (MyAppException mae){
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(orgView);
@@ -61,8 +70,12 @@ public class OrgControllerImpl implements OrgController {
         try {
             success = orgService.update(orgView);
         }
+        catch (MyAppException mae){
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -76,7 +89,7 @@ public class OrgControllerImpl implements OrgController {
             success = orgService.save(orgView);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -90,7 +103,7 @@ public class OrgControllerImpl implements OrgController {
             success = orgService.delete(id);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);

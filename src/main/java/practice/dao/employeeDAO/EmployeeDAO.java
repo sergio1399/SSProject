@@ -1,6 +1,7 @@
 package practice.dao.employeeDAO;
 
 import practice.model.employeeModel.Employee;
+import practice.utils.MyAppException;
 import practice.view.employeeView.EmployeeInView;
 import practice.view.employeeView.EmployeeView;
 
@@ -12,11 +13,11 @@ import java.util.List;
 public interface EmployeeDAO {
     List<Employee> getEmployees(EmployeeInView employeeInView);
 
-    Employee getEmp(long id);
+    Employee getEmp(long id) throws MyAppException;
 
-    boolean update(EmployeeView employeeView);
+    boolean update(EmployeeView employeeView) throws MyAppException;
 
-    boolean save(EmployeeView employeeView);
+    boolean save(EmployeeView employeeView) throws MyAppException;
 
     boolean delete(long id);
 }

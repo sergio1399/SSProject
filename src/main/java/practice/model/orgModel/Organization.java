@@ -138,13 +138,17 @@ public class Organization {
         this.offices = offices;
     }
 
-    public Organization(String name, String inn, boolean isActive) {
+    public Organization(){
+
+    }
+
+    public Organization(String name, String inn, Boolean isActive) {
         this.name = name;
         this.inn = inn;
         this.isActive = isActive;
     }
 
-    public Organization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+    public Organization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -155,7 +159,7 @@ public class Organization {
         this.isActive = isActive;
     }
 
-    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;

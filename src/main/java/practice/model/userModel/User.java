@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "User")
 public class User {
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private Long id;
 
@@ -20,12 +21,11 @@ public class User {
     @Version
     private Integer version;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    /*@OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    private Employee employee;
+    private Employee employee;*/
 
-    @Column(name = "name",
-            nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "login", unique = true,
@@ -46,13 +46,13 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    public Employee getEmployee() {
+   /* public Employee getEmployee() {
         return employee;
     }
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
+    }*/
 
     public String getName() {
         return name;
@@ -96,10 +96,6 @@ public class User {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Boolean getActive() {

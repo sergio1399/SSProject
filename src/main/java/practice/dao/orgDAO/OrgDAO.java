@@ -1,6 +1,7 @@
 package practice.dao.orgDAO;
 
 import practice.model.orgModel.Organization;
+import practice.utils.MyAppException;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface OrgDAO {
 
     List<Organization> getOrganizations(Organization fltOrg);
 
-    Organization getOrg(long id);
+    Organization getOrg(long id) throws MyAppException;
 
     boolean update(Organization org);
 

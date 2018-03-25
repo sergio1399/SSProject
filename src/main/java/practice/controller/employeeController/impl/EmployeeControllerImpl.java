@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import practice.utils.MyAppException;
 import practice.view.commonView.ResponseView;
 import practice.controller.employeeController.EmployeeController;
 import practice.service.employeeService.EmployeeService;
@@ -40,7 +41,7 @@ public class EmployeeControllerImpl implements EmployeeController {
             list = employeeService.getEmployees(employeeInView);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(list);
@@ -53,8 +54,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         try {
             employeeView = employeeService.getEmp(id);
         }
+        catch (MyAppException mae){
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(employeeView);
@@ -67,8 +72,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         try {
             success = employeeService.update(employeeView);
         }
+        catch (MyAppException mae) {
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -81,8 +90,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         try {
             success = employeeService.save(employeeView);
         }
+        catch (MyAppException mae) {
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -96,7 +109,7 @@ public class EmployeeControllerImpl implements EmployeeController {
             success = employeeService.delete(id);
         }
         catch (Exception e) {
-            String message = "";
+            String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
         }
         return new ResponseView(success);

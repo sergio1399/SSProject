@@ -1,6 +1,7 @@
 package practice.dao.officeDAO;
 
 import practice.model.officeModel.Office;
+import practice.utils.MyAppException;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public interface OfficeDAO {
     List<Office> getOffices(long orgId,  Office fltOffice);
 
-    Office getOffice(long id);
+    Office getOffice(long id) throws MyAppException;
 
     boolean update(Office office);
 

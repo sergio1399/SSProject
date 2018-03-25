@@ -22,11 +22,13 @@ INSERT INTO Document (version, doc_types_id, doc_number, doc_date, is_identified
 INSERT INTO Address (version, address, countries_id)
    VALUES(0, '3454 Main st. Sommerville NJ', 5);
 
-INSERT INTO Employee (version, first_name, second_name, middle_name, position, phone, countries_id, office_id, document_id, address_id)
-   VALUES (0, 'John', 'Simonic', null, 'manager', '2525251', 5, 1, 1, 1);
+INSERT INTO Employee (version, first_name, last_name, middle_name, position, phone, office_id, document_id, address_id)
+   VALUES (0, 'John', 'Simonic', null, 'manager', '2525251', 1, 1, 1);
 
-INSERT INTO User (employee_id, version, name, login, password, is_active, code, role)
-  VALUES (1, 0, 'Johnny', 'silent_assasin', '23rtswe5', false, 'bas43k7nty51', 'admin');
+INSERT INTO User (version, name, login, password, is_active, code, role)
+  VALUES (0, 'Johnny', 'silent_assasin', '23rtswe5', false, 'bas43k7nty51', 'admin');
 
+INSERT INTO Office (version, organization_id, name, address, phone, is_active)
+   VALUES (0, 1, 'Local Branch', '1122 Main st. Bangor MN', '11746532', TRUE);
 
 

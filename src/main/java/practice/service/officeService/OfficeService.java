@@ -1,5 +1,6 @@
 package practice.service.officeService;
 
+import practice.utils.MyAppException;
 import practice.view.officeView.OfficeInView;
 import practice.view.officeView.OfficeView;
 
@@ -11,11 +12,11 @@ import java.util.List;
 public interface OfficeService {
     List<OfficeView> getOffices(OfficeInView officeInView);
 
-    OfficeView getOffice(long id);
+    OfficeView getOffice(long id) throws MyAppException;
 
-    boolean update(OfficeView officeView);
+    boolean update(OfficeView officeView) throws MyAppException;
 
-    boolean save(OfficeView officeView);
+    boolean save(OfficeView officeView) throws MyAppException;
 
     boolean delete(long id);
 }
