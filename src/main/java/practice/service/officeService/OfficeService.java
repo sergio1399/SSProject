@@ -10,7 +10,7 @@ import java.util.List;
  * Created by sergi on 15.03.2018.
  */
 public interface OfficeService {
-    List<OfficeView> getOffices(OfficeInView officeInView);
+    List<OfficeView> getOffices(OfficeInView officeInView) throws MyAppException;
 
     OfficeView getOffice(long id) throws MyAppException;
 

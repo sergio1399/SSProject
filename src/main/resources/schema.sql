@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Employee (
 CREATE TABLE IF NOT EXISTS Address (
     id            INTEGER  PRIMARY KEY AUTO_INCREMENT,
     version       INTEGER NOT NULL,
-    address       VARCHAR(80) NOT NULL,
+    address       VARCHAR(80),
     countries_id  INTEGER
 );
 

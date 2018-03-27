@@ -10,6 +10,7 @@ import java.util.Set;
 @Entity(name = "Doc_types")
 public class Doc_types {
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private Long id;
 

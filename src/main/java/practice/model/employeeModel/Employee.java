@@ -35,18 +35,6 @@ public class Employee {
         this.office = office;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "countries_id")
-    private Country country;
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id")

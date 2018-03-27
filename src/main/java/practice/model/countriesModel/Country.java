@@ -1,5 +1,6 @@
 package practice.model.countriesModel;
 
+import practice.model.employeeModel.Address;
 import practice.model.employeeModel.Employee;
 
 import javax.persistence.*;
@@ -22,27 +23,26 @@ public class Country {
     private Integer version;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Employee> employees;
+    private Set<Address> addresses;
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-
-        this.employees = employees;
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
-    public void addEmployee(Employee employee)
+    public void addAddress(Address address)
     {
-        getEmployees().add(employee);
-        employee.setCountry(this);
+        getAddresses().add(address);
+        address.setCountry(this);
     }
 
-    public void removeEmployee(Employee employee)
+    public void removeAddress(Address address)
     {
-        getEmployees().remove(employee);
-        employee.setCountry(null);
+        getAddresses().remove(address);
+        address.setCountry(null);
     }
 
     public Long getId() {

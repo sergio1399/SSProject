@@ -22,7 +22,7 @@ public interface EmployeeController {
      * @param id
      * @return JSON employee value
      */
-    ResponseView getEmp(@PathVariable("id") int id);
+    ResponseView getEmp(@PathVariable("id") long id);
 
     /**
      * Update employee
@@ -43,5 +43,5 @@ public interface EmployeeController {
      * @param id
      * @return JSON success check
      */
-    ResponseView delete(@PathVariable("id") int id);
+    ResponseView delete(@PathVariable("id") long id);
 }

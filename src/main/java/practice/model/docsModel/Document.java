@@ -12,6 +12,7 @@ import java.util.Set;
 @Entity(name = "Document")
 public class Document {
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private Long id;
 
@@ -21,7 +22,7 @@ public class Document {
     @Version
     private Integer version;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "document", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "document", cascade = CascadeType.ALL)
     private Set<Employee> employees;
 
     public void setEmployees(Set<Employee> employees) {

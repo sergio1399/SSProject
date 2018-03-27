@@ -10,7 +10,7 @@ import java.util.List;
  * Created by sergi on 15.03.2018.
  */
 public interface EmployeeService {
-    List<EmployeeView> getEmployees(EmployeeInView employeeInView);
+    List<EmployeeView> getEmployees(EmployeeInView employeeInView) throws MyAppException;
 
     EmployeeView getEmp(long id) throws MyAppException;
 
@@ -18,5 +18,5 @@ public interface EmployeeService {
 
     boolean save(EmployeeView employeeView) throws MyAppException;
 
-    boolean delete(long id);
+    boolean delete(long id) throws MyAppException;
 }

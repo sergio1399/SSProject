@@ -40,6 +40,10 @@ public class EmployeeControllerImpl implements EmployeeController {
         try {
             list = employeeService.getEmployees(employeeInView);
         }
+        catch (MyAppException mae){
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);
@@ -49,7 +53,7 @@ public class EmployeeControllerImpl implements EmployeeController {
 
     @Override
     @RequestMapping(value = "/{id}", method = {GET})
-    public ResponseView getEmp(@PathVariable("id") int id) {
+    public ResponseView getEmp(@PathVariable("id") long id) {
         EmployeeView employeeView = new EmployeeView();
         try {
             employeeView = employeeService.getEmp(id);
@@ -85,7 +89,7 @@ public class EmployeeControllerImpl implements EmployeeController {
 
     @Override
     @RequestMapping(value = "/save", method = {POST})
-    public ResponseView save(EmployeeView employeeView) {
+    public ResponseView save(@RequestBody EmployeeView employeeView) {
         Boolean success = false;
         try {
             success = employeeService.save(employeeView);
@@ -103,10 +107,14 @@ public class EmployeeControllerImpl implements EmployeeController {
 
     @Override
     @RequestMapping(value = "/delete/{id}", method = {POST})
-    public ResponseView delete(int id) {
+    public ResponseView delete(@PathVariable("id") long id) {
         Boolean success = false;
         try {
             success = employeeService.delete(id);
+        }
+        catch (MyAppException mae) {
+            String message = mae.getMessage();
+            return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";

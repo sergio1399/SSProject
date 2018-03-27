@@ -34,6 +34,10 @@ public class OfficeControllerImpl implements OfficeController {
         try {
             list = officeService.getOffices(officeInView);
         }
+        catch (MyAppException mae){
+            String message = mae.getMessage();
+            return new ResponseView(message);
+        }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
             return new ResponseView(message);

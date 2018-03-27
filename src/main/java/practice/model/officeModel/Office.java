@@ -104,7 +104,7 @@ public class Office {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 
@@ -113,20 +113,20 @@ public class Office {
 
     }
 
-    public Office(String name, String phone, boolean isActive) {
+    public Office(String name, String phone, Boolean isActive) {
         this.name = name;
         this.phone = phone;
         this.isActive = isActive;
     }
 
-    public Office(String name, String address, String phone, boolean isActive) {
+    public Office(String name, String address, String phone, Boolean isActive) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
     }
 
-    public Office(Long id, String name, String address, String phone, boolean isActive) {
+    public Office(Long id, String name, String address, String phone, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.address = address;

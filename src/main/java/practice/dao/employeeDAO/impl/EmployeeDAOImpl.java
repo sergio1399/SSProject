@@ -6,6 +6,7 @@ import practice.model.countriesModel.Country;
 import practice.model.docsModel.Doc_types;
 import practice.model.docsModel.Document;
 import practice.dao.employeeDAO.EmployeeDAO;
+import practice.model.employeeModel.Address;
 import practice.model.employeeModel.Employee;
 import practice.utils.ErrorCode;
 import practice.utils.MyAppException;
@@ -66,7 +67,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
         if (employeeInView.citizenshipCode != null) {
             predicates.add(
-                    qb.equal(employeeRoot.get("country").get("code"), employeeInView.citizenshipCode));
+                    qb.equal(employeeRoot.get("address").get("country").get("code"), employeeInView.citizenshipCode));
         }
         if (employeeInView.docCode != null) {
             predicates.add(
@@ -101,9 +102,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             //апдейт связанных сущностей
             //апдейт документа
             Document document = empToUpdate.getDocument();
+
             if(employeeView.docName != null) {
                 Doc_types doc_types = findDocType(employeeView.docName);
+                if(doc_types == null)
+                    throw new MyAppException("Несогласованные параметры для обновления документа работника",
+                            ErrorCode.WRONG_DOC_PARAMS);
                 document.setDocType(doc_types);
+                document.setDocDate(employeeView.docDate);
+                document.setDocNumber(employeeView.docNumber);
+                document.setIdentified(employeeView.isIdentified);
             }
             else {
                 if (employeeView.docDate != null || employeeView.docNumber != null || employeeView.isIdentified != null)
@@ -111,17 +119,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                     throw new MyAppException("Несогласованные параметры для обновления документа работника",
                                              ErrorCode.WRONG_DOC_PARAMS);
                 }
+                empToUpdate.setDocument(null);
             }
-            document.setDocDate(employeeView.docDate);
-            document.setDocNumber(employeeView.docNumber);
-            document.setIdentified(employeeView.isIdentified);
+
+            Address address = empToUpdate.getAddress();
             Country country = findCountry(employeeView.citizenshipCode, employeeView.citizenshipName);
             if( country == null)
             {
                 throw new MyAppException("Несогласованные параметры для обновления страны работника",
                         ErrorCode.WRONG_COUNTRY_PARAMS);
             }
-            empToUpdate.setCountry(country);
+            address.setCountry(country);
             em.merge(empToUpdate);
             return true;
     }
@@ -135,26 +143,25 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             criteria.select(countryRoot).where(builder.and(builder.equal(countryRoot.get("code"), code),
                     builder.equal(countryRoot.get("name"), name)));
             TypedQuery<Country> query = em.createQuery(criteria);
-            Country country = query.getSingleResult();
-            if (country != null)
-                return country;
+            List<Country> result = query.getResultList();
+            if (!result.isEmpty())
+                return result.get(0);
 
             return null;
     }
 
     private Doc_types findDocType(String name)
     {
-        Doc_types doc_types = new Doc_types();
-
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Doc_types> criteria = builder.createQuery(Doc_types.class);
 
         Root<Doc_types> docRoot = criteria.from(Doc_types.class);
         criteria.select(docRoot).where(builder.equal(docRoot.get("name"), name));
         TypedQuery<Doc_types> query = em.createQuery(criteria);
-        doc_types = query.getSingleResult();
-
-        return doc_types;
+        List<Doc_types> result = query.getResultList();
+        if (!result.isEmpty())
+            return result.get(0);
+        return null;
     }
 
     @Override
@@ -168,9 +175,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             throw new MyAppException("Несогласованные параметры для сохранения страны работника",
                     ErrorCode.WRONG_COUNTRY_PARAMS);
         }
-        employee.setCountry(country);
+        Address address = new Address();
+        address.setCountry(country);
+        employee.setAddress(address);
         Doc_types doc_types = findDocType(employeeView.docName);
-        if(doc_types == null || doc_types.getCode() != employeeView.docCode)
+        if(doc_types == null ||  !employeeView.docCode.equals(doc_types.getCode()))
         {
             throw new MyAppException("Несогласованные параметры для сохранения документа работника",
                     ErrorCode.WRONG_DOC_PARAMS);
@@ -180,17 +189,23 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         document.setDocNumber(employeeView.docNumber);
         document.setDocDate(employeeView.docDate);
         document.setIdentified(employeeView.isIdentified);
+        employee.setDocument(document);
         Office office = em.find(Office.class, employeeView.officeId);
         employee.setOffice(office);
         office.addEmployee(employee);
+        em.persist(address);
+        em.persist(document);
         em.persist(employee);
 
         return true;
     }
 
     @Override
-    public boolean delete(long id) {
+    public boolean delete(long id) throws MyAppException {
         Employee employee = em.find(Employee.class, id);
+        if(employee == null){
+            throw new MyAppException(String.format("Работник с id %d не найден в базе", id), ErrorCode.WRONG_ID);
+        }
         employee.setOffice(null);
         em.remove(employee);
 

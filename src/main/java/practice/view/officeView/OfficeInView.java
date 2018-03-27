@@ -12,7 +12,7 @@ public class OfficeInView {
 
     public String phone;
 
-    public boolean isActive;
+    public Boolean isActive;
 
     //для jackson
     public OfficeInView() {

@@ -13,6 +13,7 @@ import practice.model.employeeModel.Address;
 import practice.model.employeeModel.Employee;
 import practice.service.employeeService.EmployeeService;
 import practice.utils.EmployeeConverter;
+import practice.utils.ErrorCode;
 import practice.utils.MyAppException;
 import practice.view.employeeView.EmployeeInView;
 import practice.view.employeeView.EmployeeView;
@@ -36,7 +37,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<EmployeeView> getEmployees(EmployeeInView employeeInView) {
+    public List<EmployeeView> getEmployees(EmployeeInView employeeInView) throws MyAppException {
+        if(employeeInView.officeId == null)
+            throw new MyAppException("Не установлен обязательный параметр id офиса", ErrorCode.NULL_REQUIRED_PARAM);
         return EmployeeConverter.toViewList(employeeDAO.getEmployees(employeeInView));
     }
 
@@ -54,20 +57,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public boolean update(EmployeeView employeeView) throws MyAppException {
-
+        if(employeeView.id == null)
+            throw new MyAppException("Не установлен обязательный параметр id", ErrorCode.NULL_REQUIRED_PARAM);
         return employeeDAO.update(employeeView);
     }
 
     @Override
     @Transactional
     public boolean save(EmployeeView employeeView) throws MyAppException {
-
+        if(employeeView.officeId == null)
+            throw new MyAppException("Не установлен обязательный параметр id офиса", ErrorCode.NULL_REQUIRED_PARAM);
         return employeeDAO.save(employeeView);
     }
 
     @Override
     @Transactional
-    public boolean delete(long id) {
+    public boolean delete(long id) throws MyAppException {
 
         return employeeDAO.delete(id);
     }

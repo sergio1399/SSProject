@@ -5,11 +5,14 @@ import org.springframework.stereotype.Repository;
 import practice.dao.userDAO.UserDAO;
 import practice.model.userModel.User;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sergi on 15.03.2018.
@@ -31,18 +34,18 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean activation(String code) {
-        User user = new User();
+        List<User> result = new ArrayList<>();
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteria = builder.createQuery(User.class);
 
         Root<User> userRoot = criteria.from(User.class);
         criteria.select(userRoot).where(builder.equal(userRoot.get("code"), code));
         TypedQuery<User> query = em.createQuery(criteria);
-        user = query.getSingleResult();
-        if(user != null && !user.getActive())
+        result = query.getResultList();
+        if(!result.isEmpty() && !result.get(0).getActive())
         {
-            user.setActive(true);
-            em.merge(user);
+            result.get(0).setActive(true);
+            em.merge(result.get(0));
             return true;
         }
 
@@ -58,8 +61,8 @@ public class UserDAOImpl implements UserDAO {
         criteria.select(userRoot).where(builder.and(builder.equal(userRoot.get("login"), login),
                        builder.equal(userRoot.get("password"), password)));
         TypedQuery<User> query = em.createQuery(criteria);
-        User user = query.getSingleResult();
-        if (user != null)
+        List<User> result = query.getResultList();
+        if (!result.isEmpty())
             return true;
 
         return false;

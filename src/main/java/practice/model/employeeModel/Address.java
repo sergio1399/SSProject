@@ -21,7 +21,7 @@ public class Address {
     @Version
     private Integer version;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private Set<Employee> employees;
 
     public void addEmployee(Employee employee)
@@ -56,8 +56,7 @@ public class Address {
         this.employees = employees;
     }
 
-    @Column(name = "address",
-            nullable = false)
+    @Column(name = "address")
     private String address;
 
     public Long getId() {

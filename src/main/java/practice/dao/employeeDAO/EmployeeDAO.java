@@ -19,5 +19,5 @@ public interface EmployeeDAO {
 
     boolean save(EmployeeView employeeView) throws MyAppException;
 
-    boolean delete(long id);
+    boolean delete(long id) throws MyAppException;
 }

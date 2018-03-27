@@ -33,8 +33,9 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public List<OfficeView> getOffices(OfficeInView officeInView) {
-
+    public List<OfficeView> getOffices(OfficeInView officeInView) throws MyAppException {
+        if(officeInView.orgId == null)
+            throw new MyAppException("Не установлен обязательный параметр id организации", ErrorCode.NULL_REQUIRED_PARAM);
         Office fltOffice = new Office(officeInView.name, officeInView.phone, officeInView.isActive);
         return OfficeConverter.toViewList(officeDAO.getOffices(officeInView.orgId, fltOffice));
     }
