@@ -1,9 +1,12 @@
 package practice.controller.docsController.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import practice.service.employeeService.impl.EmployeeServiceImpl;
 import practice.view.commonView.ResponseView;
 import practice.controller.docsController.DocsController;
 import practice.service.docsService.DocsService;
@@ -21,6 +24,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 @RequestMapping(value = "api/docs", produces = APPLICATION_JSON_VALUE)
 public class DocsControllerImpl implements DocsController {
+    private final Logger log = LoggerFactory.getLogger(DocsControllerImpl.class);
+
     private final DocsService docsService;
 
     @Autowired
@@ -36,6 +41,7 @@ public class DocsControllerImpl implements DocsController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(list);

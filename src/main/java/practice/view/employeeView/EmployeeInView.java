@@ -26,4 +26,17 @@ public class EmployeeInView {
     public EmployeeInView() {
 
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeInView{" +
+                "officeId=" + officeId +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", docCode='" + docCode + '\'' +
+                ", citizenshipCode='" + citizenshipCode + '\'' +
+                '}';
+    }
 }

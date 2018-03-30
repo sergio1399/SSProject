@@ -17,4 +17,12 @@ public class CountriesView {
     public CountriesView() {
 
     }
+
+    @Override
+    public String toString() {
+        return "CountriesView{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -1,9 +1,12 @@
 package practice.controller.countriesController.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import practice.service.employeeService.impl.EmployeeServiceImpl;
 import practice.utils.MyAppException;
 import practice.view.commonView.ResponseView;
 import practice.controller.countriesController.CountriesController;
@@ -22,6 +25,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 @RequestMapping(value = "api/countries", produces = APPLICATION_JSON_VALUE)
 public class CountriesControllerImpl implements CountriesController {
+    private final Logger log = LoggerFactory.getLogger(CountriesControllerImpl.class);
+
     private final CountriesService countriesService;
 
     @Autowired
@@ -38,6 +43,7 @@ public class CountriesControllerImpl implements CountriesController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(list);

@@ -19,6 +19,7 @@ INSERT INTO Doc_types (version, code, name) VALUES (0, '13','Удостовер�
 INSERT INTO Document (version, doc_types_id, doc_number, doc_date, is_identified)
    VALUES (0, 1, '2354 327654', '2007-02-02', TRUE);
 
+
 INSERT INTO Address (version, address, countries_id)
    VALUES(0, '3454 Main st. Sommerville NJ', 5);
 

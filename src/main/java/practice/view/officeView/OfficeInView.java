@@ -18,4 +18,14 @@ public class OfficeInView {
     public OfficeInView() {
 
     }
+
+    @Override
+    public String toString() {
+        return "OfficeInView{" +
+                "orgId=" + orgId +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive=" + isActive +
+                '}';
+    }
 }

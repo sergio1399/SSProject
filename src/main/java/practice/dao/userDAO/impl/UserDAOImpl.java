@@ -59,7 +59,7 @@ public class UserDAOImpl implements UserDAO {
 
         Root<User> userRoot = criteria.from(User.class);
         criteria.select(userRoot).where(builder.and(builder.equal(userRoot.get("login"), login),
-                       builder.equal(userRoot.get("password"), password)));
+                       builder.equal(userRoot.get("password"), password), builder.equal(userRoot.get("isActive"), true)) );
         TypedQuery<User> query = em.createQuery(criteria);
         List<User> result = query.getResultList();
         if (!result.isEmpty())
@@ -67,4 +67,20 @@ public class UserDAOImpl implements UserDAO {
 
         return false;
     }
+
+    @Override
+    public String getActivationCode(String login) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<String> criteria = builder.createQuery(String.class);
+
+        Root<User> userRoot = criteria.from(User.class);
+        criteria.select(userRoot.get("code")).where(builder.equal(userRoot.get("login"), login));
+        TypedQuery<String> query = em.createQuery(criteria);
+        List<String> result = query.getResultList();
+        if (!result.isEmpty())
+            return result.get(0);
+        return "";
+    }
+
+
 }

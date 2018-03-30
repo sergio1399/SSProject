@@ -1,8 +1,11 @@
 package practice.controller.orgController.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import practice.controller.orgController.OrgController;
+import practice.service.employeeService.impl.EmployeeServiceImpl;
 import practice.utils.MyAppException;
 import practice.view.commonView.ResponseView;
 import practice.service.orgService.OrgService;
@@ -19,6 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping(value = "api/organization", produces = APPLICATION_JSON_VALUE)
 public class OrgControllerImpl implements OrgController {
+    private final Logger log = LoggerFactory.getLogger(OrgControllerImpl.class);
 
     private final OrgService orgService;
 
@@ -36,10 +40,12 @@ public class OrgControllerImpl implements OrgController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(message);
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(list);
@@ -54,10 +60,12 @@ public class OrgControllerImpl implements OrgController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(message);
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(orgView);
@@ -72,10 +80,12 @@ public class OrgControllerImpl implements OrgController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(message);
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -90,6 +100,7 @@ public class OrgControllerImpl implements OrgController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -104,6 +115,7 @@ public class OrgControllerImpl implements OrgController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);

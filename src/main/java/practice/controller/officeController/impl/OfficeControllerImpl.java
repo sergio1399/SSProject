@@ -1,7 +1,10 @@
 package practice.controller.officeController.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import practice.service.employeeService.impl.EmployeeServiceImpl;
 import practice.utils.MyAppException;
 import practice.view.commonView.ResponseView;
 import practice.controller.officeController.OfficeController;
@@ -19,6 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping(value = "api/office", produces = APPLICATION_JSON_VALUE)
 public class OfficeControllerImpl implements OfficeController {
+    private final Logger log = LoggerFactory.getLogger(OfficeControllerImpl.class);
 
     private final OfficeService officeService;
 
@@ -36,10 +40,12 @@ public class OfficeControllerImpl implements OfficeController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(list);
@@ -54,10 +60,12 @@ public class OfficeControllerImpl implements OfficeController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(officeView);
@@ -72,10 +80,12 @@ public class OfficeControllerImpl implements OfficeController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(message);
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -90,10 +100,12 @@ public class OfficeControllerImpl implements OfficeController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(message);
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -108,6 +120,7 @@ public class OfficeControllerImpl implements OfficeController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);

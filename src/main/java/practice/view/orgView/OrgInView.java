@@ -19,4 +19,13 @@ public class OrgInView {
     public OrgInView() {
 
     }
+
+    @Override
+    public String toString() {
+        return "OrgInView{" +
+                "name='" + name + '\'' +
+                ", inn='" + inn + '\'' +
+                ", isActive=" + isActive +
+                '}';
+    }
 }

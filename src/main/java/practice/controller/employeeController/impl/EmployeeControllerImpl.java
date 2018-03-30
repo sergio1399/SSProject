@@ -1,10 +1,13 @@
 package practice.controller.employeeController.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import practice.service.employeeService.impl.EmployeeServiceImpl;
 import practice.utils.MyAppException;
 import practice.view.commonView.ResponseView;
 import practice.controller.employeeController.EmployeeController;
@@ -25,6 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping(value = "api/user", produces = APPLICATION_JSON_VALUE)
 public class EmployeeControllerImpl implements EmployeeController {
+    private final Logger log = LoggerFactory.getLogger(EmployeeControllerImpl.class);
 
     private final EmployeeService employeeService;
 
@@ -42,10 +46,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(list);
@@ -60,10 +66,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         }
         catch (MyAppException mae){
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(employeeView);
@@ -78,10 +86,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         }
         catch (MyAppException mae) {
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -96,10 +106,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         }
         catch (MyAppException mae) {
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -114,10 +126,12 @@ public class EmployeeControllerImpl implements EmployeeController {
         }
         catch (MyAppException mae) {
             String message = mae.getMessage();
+            log.error(mae.getMessage());
             return new ResponseView(message);
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);

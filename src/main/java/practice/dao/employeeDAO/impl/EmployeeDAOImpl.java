@@ -8,6 +8,7 @@ import practice.model.docsModel.Document;
 import practice.dao.employeeDAO.EmployeeDAO;
 import practice.model.employeeModel.Address;
 import practice.model.employeeModel.Employee;
+import practice.utils.EmployeeConverter;
 import practice.utils.ErrorCode;
 import practice.utils.MyAppException;
 import practice.view.employeeView.EmployeeInView;
@@ -166,8 +167,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public boolean save(EmployeeView employeeView) throws MyAppException {
-        Employee employee = new Employee(employeeView.firstName, employeeView.lastName, employeeView.middleName,
-                                        employeeView.position, employeeView.phone);
+        Employee employee = EmployeeConverter.toModel(employeeView);
         //сохранение связанных сущностей
         Country country = findCountry(employeeView.citizenshipCode, employeeView.citizenshipName);
         if(country == null)

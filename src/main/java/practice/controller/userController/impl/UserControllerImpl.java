@@ -1,10 +1,13 @@
 package practice.controller.userController.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import practice.service.employeeService.impl.EmployeeServiceImpl;
 import practice.view.commonView.ResponseView;
 import practice.controller.userController.UserController;
 import practice.service.userService.UserService;
@@ -20,6 +23,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping(value = "api", produces = APPLICATION_JSON_VALUE)
 public class UserControllerImpl implements UserController {
+    private final Logger log = LoggerFactory.getLogger(UserControllerImpl.class);
+
     private final UserService userService;
 
     @Autowired
@@ -36,6 +41,7 @@ public class UserControllerImpl implements UserController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -50,6 +56,7 @@ public class UserControllerImpl implements UserController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);
@@ -64,6 +71,7 @@ public class UserControllerImpl implements UserController {
         }
         catch (Exception e) {
             String message = "Внутренняя ошибка сервера";
+            log.error(e.getMessage());
             return new ResponseView(message);
         }
         return new ResponseView(success);

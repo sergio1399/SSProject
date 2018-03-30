@@ -16,4 +16,12 @@ public class DocsView {
     public DocsView() {
 
     }
+
+    @Override
+    public String toString() {
+        return "DocsView{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

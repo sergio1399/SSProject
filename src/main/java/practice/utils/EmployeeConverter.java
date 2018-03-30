@@ -1,8 +1,11 @@
 package practice.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import practice.model.countriesModel.Country;
 import practice.model.docsModel.Doc_types;
 import practice.model.docsModel.Document;
+import practice.model.employeeModel.Address;
 import practice.model.employeeModel.Employee;
 import practice.view.countriesView.CountriesView;
 import practice.view.employeeView.EmployeeView;
@@ -15,7 +18,7 @@ import java.util.stream.Collectors;
  * Created by sergi on 23.03.2018.
  */
 public class EmployeeConverter {
-
+    private static final Logger log = LoggerFactory.getLogger(EmployeeConverter.class);
     public static List<EmployeeView> toViewList(List<Employee> employees)
     {
         Function<Employee, EmployeeView> mapEmp = e -> {
@@ -25,7 +28,7 @@ public class EmployeeConverter {
             view.lastName = e.getLastName();
             view.middleName = e.getMiddleName();
             view.position = e.getPosition();
-
+            log.debug(view.toString());
             return view;
         };
 
@@ -34,7 +37,12 @@ public class EmployeeConverter {
                 .collect(Collectors.toList());
     }
 
-    public static EmployeeView toView(Employee employee, Document document, Doc_types dt, Country country){
+    public static EmployeeView toView(Employee employee){
+        Document document = employee.getDocument();
+        Doc_types dt = document.getDocType();
+        Address address = employee.getAddress();
+        Country country = address.getCountry();
+
         EmployeeView view = new EmployeeView();
         view.id = employee.getId();
         view.firstName = employee.getFirstName();
@@ -48,9 +56,13 @@ public class EmployeeConverter {
         view.isIdentified = document.isIdentified();
         view.citizenshipCode = country.getCode();
         view.citizenshipName = country.getName();
-
+        log.debug(view.toString());
         return view;
     }
 
+    public static Employee toModel(EmployeeView employeeView){
+        return new Employee(employeeView.firstName, employeeView.lastName, employeeView.middleName,
+                employeeView.position, employeeView.phone);
+    }
 
 }

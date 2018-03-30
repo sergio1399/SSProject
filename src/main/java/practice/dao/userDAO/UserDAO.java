@@ -12,4 +12,6 @@ public interface UserDAO {
     boolean activation(String code);
 
     boolean login(String login, String password);
+
+    String getActivationCode(String login);
 }

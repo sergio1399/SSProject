@@ -36,4 +36,13 @@ public class ResponseView {
     public ResponseView() {
 
     }
+
+    @Override
+    public String toString() {
+        return "ResponseView{" +
+                "result=" + result +
+                ", error='" + error + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }
